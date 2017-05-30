@@ -1,0 +1,28 @@
+Implementation: 
+
+The basic structure of cons cells is as follows:
+
+(a b c) => (-> . -> . -> .->.
+           |   |    |    |    
+	   a   b    c    .  
+
+Key- . = cons cell with symbol as NULL
+
+Implementation for each function has been noted in the parser2.c source file.
+
+
+Bugs:
+
+Program behaves somewhat differently than what has exactly been specified, so the input file has been changed to reflect these changes in behavior. The changes in behavior are listed below:
+
+i) (define symbol (assoc)) => (define (symbol (assoc)))
+
+- this can easily be fixed by consing symbol to assoc and then consing that list to GlobalEnv, However, this was not implemented at the time of submission.
+
+ii) (cond (((cond) (output)) ((cond) (input)))
+
+- the cond input similarly must also be placed as a whole within a list. Cond has not been sufficiently tested and may show bugs.
+
+iii) append changes the variables that are given to it. To be specific if 2 variabl from globalEnv are provided to append, append changes the second variable. This can overcome by making copies of pointers and then returning the final result instead of working with the pointers themselves. 
+
+These fixes were not implemented, as the fixes started to show additional side-effects in the program. They maybe implemented in a version 2 of this project, if there is enough time.
